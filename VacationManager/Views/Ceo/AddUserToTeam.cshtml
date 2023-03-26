@@ -1,0 +1,27 @@
+﻿@model VacationManager.Models.AdditionalModels.AddUserToTeamModel;
+
+@{
+    ViewBag.Title = "Add user to team";
+}
+
+<h1>Edit Role</h1>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="TeamName" class="control-label"></label>
+        <select asp-for="TeamName" asp-items="@ViewBag.Teams" name="teamId" class="form-control"></select>
+        <span asp-validation-for="TeamName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" asp-route-email="@Model.Email">Update</button>
+        </div>
+    </div>
+</form>
