@@ -10,7 +10,7 @@ using VacationManager.Models.AdditionalModels;
 
 namespace VacationManager.Controllers
 {
-    [Authorize(Roles = "ceo")]
+    [Authorize(Roles = "CEO")]
     public class CeoController: Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

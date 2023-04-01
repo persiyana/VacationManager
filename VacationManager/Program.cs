@@ -26,6 +26,14 @@ builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService
 
 var app = builder.Build();
 
+using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await RoleInitializer.InitializeAsync(roleManager);
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -14,11 +14,11 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="/Dashboard/Display">Dashboard</a></li>
-                @if (User.IsInRole("admin"))
+                @if (User.IsInRole("Admin"))
                 {
                     <li><a href="/Admin/Display">Admin Page</a></li>
                 }
-                @if (User.IsInRole("ceo"))
+                @if (User.IsInRole("CEO"))
                 {
                     <li><a href="/Ceo/Index">Ceo Page</a></li>
                 }
