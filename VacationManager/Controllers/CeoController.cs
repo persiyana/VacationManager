@@ -81,10 +81,12 @@ namespace VacationManager.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
+                var team = await _context.Teams.FirstOrDefaultAsync(t => t.Id == teamId);
                 if(user != null)
                 {
                     user.TeamId = teamId;
                     _context.ApplicationUsers.Update(user);
+                    team.ApplicationUsers.Add(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
