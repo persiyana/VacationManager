@@ -27,9 +27,19 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt>
+            Teams
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.Teams)
+            {
+                <p>@item.Name</p>
+            }
+        </dd>
     </dl>
 </div>
 <div>
+        <a href="../Teams/Index">Add team to a project</a>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

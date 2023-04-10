@@ -7,7 +7,8 @@ namespace VacationManager.Models.AdditionalModels
     public class CeoIndexModel
     {
         public List<ApplicationUser> Users { get; set; }
-        public List<string> UserRoles { get; set; }
+
+        public Dictionary<ApplicationUser, string> UserRoles { get; set; }
         private readonly UserManager<ApplicationUser> _userManager;
         public CeoIndexModel(UserManager<ApplicationUser> usermanager) {
             _userManager = usermanager;
@@ -15,13 +16,13 @@ namespace VacationManager.Models.AdditionalModels
         }
         public async Task AddToList()
         {
-            Users = _userManager.Users.ToList();
             foreach (var u in Users)
             {
                 string s = _userManager.GetRolesAsync(u).Result[0];
-                UserRoles.Add(s);
+                UserRoles.Add(u, s);
             }
 
         }
+        public List<Team> Teams { get; set; }
     }
 }

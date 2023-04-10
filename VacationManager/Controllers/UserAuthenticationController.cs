@@ -63,38 +63,7 @@ namespace VacationManager.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        /* public async Task<IActionResult> AdminReg()
-         {
-             try
-             {
-
-                 if (ModelState.IsValid)
-                 {
-                     var model = new RegistrationModel()
-                     {
-                         Role = "admin",
-                         Username = "admin",
-                         Email = "admin@gmail.com",
-                         Password = "Admin@123",
-                         FirstName = "admin",
-                         LastName = "admin"
-                     };
-                     model.Role = "admin";
-                     var result = await _service.RegistrationAsync(model);
-                     return Ok(result);
-                 }
-                 else
-                 {
-                     TempData["errorMessage"] = "Model data is not valid";
-                     return View();
-                 }
-             }
-             catch (Exception ex)
-             {
-                 TempData["errorMessage"] = ex.Message;
-                 return View();
-             }
-         }*/
+        
         /*public async Task<IActionResult> CeoReg()
         {
             try

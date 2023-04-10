@@ -65,7 +65,7 @@ namespace VacationManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(team);
+                _context.Teams.Add(team);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -1,14 +1,46 @@
-﻿@{
-    string username = User.Identity.Name;
-}
+﻿@model VacationManager.Models.AdditionalModels.HomePageModel;
 
-Welcome @username
 <ul>
     @if (User.IsInRole("CEO"))
     {
-        <li><a href="/Ceo/Index">User settings</a></li>
-        <li><a href="/Teams/Index">Teams information</a></li>
-        <li><a href="/Projects/Index">Projects information</a></li>
-        <li><a href="/Vacations/Index">Vacations information</a></li>
+            <li><a href="/Ceo/Index">User settings</a></li>
+            <li><a href="/Teams/Index">Teams information</a></li>
+            <li><a href="/Projects/Index">Projects information</a></li>
+            <li><a href="/Vacations/Index">Vacations information</a></li>
     }
 </ul>
+
+<dl class="row">
+    <dt class="col-sm-2">
+        Username:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Username
+    </dd>
+    <dt class="col-sm-2">
+        First name:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.FirstName
+    </dd>
+    <dt class="col-sm-2">
+        Last name:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.LastName
+    </dd>
+    <dt class="col-sm-2">
+        Email:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Email
+    </dd>
+    <dt class="col-sm-2">
+        Role:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Role
+    </dd>
+</dl>
+<a href="">Edit Profile</a>
+

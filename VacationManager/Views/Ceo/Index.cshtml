@@ -18,24 +18,29 @@
                 <th>
                     Role
                 </th>
+                <th>
+                    Team
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @for(var i=0; i<Model.Users.Count; i++)
+            @foreach(var i in Model.Users)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.Users[i].UserName)
+                        @Html.DisplayFor(modelItem => i.UserName)
                     </td>
 
                     <td>
                         @Html.DisplayFor(modelItem => Model.UserRoles[i])
                     </td>
-
                     <td>
-                        <a asp-action="EditRole" asp-route-userId="@Model.Users[i].Id">Edit</a> |
-                        <a asp-action="AddUserToTeam" asp-route-userId="@Model.Users[i].Id">AddUserToTeam</a> 
+                        @Model.Teams.FirstOrDefault(t=>t.Id==i.TeamId).Name
+                    </td>
+                    <td>
+                        <a asp-action="EditRole" asp-route-userId="@i.Id">Edit</a> |
+                        <a asp-action="AddUserToTeam" asp-route-userId="@i.Id">AddUserToTeam</a> 
                     </td>
                 </tr>
             }

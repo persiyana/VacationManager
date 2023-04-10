@@ -36,6 +36,7 @@ namespace VacationManager.Controllers
             }
 
             var project = await _context.Projects
+                .Include(t=>t.Teams)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {

@@ -27,10 +27,12 @@ namespace VacationManager.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            CeoIndexModel model = new CeoIndexModel(_userManager)
+        
+            CeoIndexModel model = new(_userManager)
             {
-                Users = _userManager.Users.ToList(),
-                UserRoles = new List<string>()
+                Users = _userManager.Users.Include(u=>u.Team).ToList(),
+                UserRoles = new Dictionary<ApplicationUser, string>(),
+                Teams = _context.Teams.Include(t=>t.ApplicationUsers).ToList()
             };
             model.AddToList();
             //var result = _context.Users.ToList();
@@ -85,6 +87,7 @@ namespace VacationManager.Controllers
                 if(user != null)
                 {
                     user.TeamId = teamId;
+                    //user.Team = team;
                     _context.ApplicationUsers.Update(user);
                     team.ApplicationUsers.Add(user);
                     await _context.SaveChangesAsync();
