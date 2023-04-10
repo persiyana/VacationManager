@@ -38,6 +38,7 @@ namespace VacationManager.Controllers
                 .Include(t => t.Leader)
                 .Include(t => t.Project)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (team == null)
             {
                 return NotFound();
