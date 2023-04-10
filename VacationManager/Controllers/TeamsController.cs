@@ -49,8 +49,8 @@ namespace VacationManager.Controllers
         // GET: Teams/Create
         public IActionResult Create()
         {
-            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description");
+            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "UserName");
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace VacationManager.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.LeaderId);
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", team.ProjectId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", team.ProjectId);
             return View(team);
         }
 
@@ -85,8 +85,8 @@ namespace VacationManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.LeaderId);
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", team.ProjectId);
+            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "UserName", team.LeaderId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", team.ProjectId);
             return View(team);
         }
 
@@ -122,8 +122,8 @@ namespace VacationManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.LeaderId);
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Description", team.ProjectId);
+            ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "UserName", team.LeaderId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", team.ProjectId);
             return View(team);
         }
 

@@ -10,18 +10,9 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Vacation Manager</a>
+                <a class="navbar-brand" href="../Home/Index">Vacation Manager</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="/Dashboard/Display">Dashboard</a></li>
-                @if (User.IsInRole("Admin"))
-                {
-                    <li><a href="/Admin/Display">Admin Page</a></li>
-                }
-                @if (User.IsInRole("CEO"))
-                {
-                    <li><a href="/Ceo/Index">Ceo Page</a></li>
-                }
                 <li><a href="/UserAuthentication/Logout">Logout</a></li>
             </ul>
         </div>

@@ -31,7 +31,7 @@ namespace VacationManager.Controllers
             {
                 Users = _userManager.Users.ToList(),
                 UserRoles = new List<string>()
-        };
+            };
             model.AddToList();
             //var result = _context.Users.ToList();
             return View(model);

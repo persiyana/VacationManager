@@ -15,10 +15,12 @@
     </div>
     <div class="form-group">
         <label asp-for="TeamName" class="control-label"></label>
-        <select asp-for="TeamName" asp-items="@ViewBag.Teams" name="teamId" class="form-control"></select>
+        <select asp-for="TeamName" asp-items="@ViewBag.Teams" name="teamId" class="form-control">
+            <option disabled selected value=""> -- select an option -- </option>
+        </select>
         <span asp-validation-for="TeamName" class="text-danger"></span>
     </div>
-
+    <a href="/Teams/Create">Create team</a>
     <div class="form-group row">
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary" asp-route-email="@Model.Email">Update</button>

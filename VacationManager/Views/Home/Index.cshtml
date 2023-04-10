@@ -1,8 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    string username = User.Identity.Name;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+Welcome @username
+<ul>
+    @if (User.IsInRole("CEO"))
+    {
+        <li><a href="/Ceo/Index">User settings</a></li>
+        <li><a href="/Teams/Index">Teams information</a></li>
+        <li><a href="/Projects/Index">Projects information</a></li>
+        <li><a href="/Vacations/Index">Vacations information</a></li>
+    }
+</ul>

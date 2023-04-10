@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<VacationManager.Models.Team>
 
-@{
-    Layout = null;
-}
+
 
 <!DOCTYPE html>
 
@@ -25,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Leader)
+                Leader username
             </th>
             <th></th>
         </tr>
@@ -40,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Project.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Leader.Id)
+                @Html.DisplayFor(modelItem => item.Leader.UserName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
