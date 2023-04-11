@@ -6,6 +6,7 @@ using VacationManager.Models.AdditionalModels;
 using System.Security.Claims;
 using VacationManager.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace VacationManager.Controllers
 {
@@ -15,15 +16,17 @@ namespace VacationManager.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> usermanager, RoleManager<IdentityRole> rolemanager)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, UserManager<ApplicationUser> usermanager, RoleManager<IdentityRole> rolemanager)
         {
             _logger = logger;
             _userManager = usermanager;
             _roleManager = rolemanager;
+            _context = context;
         }
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var user = _userManager.FindByIdAsync(userId).Result;
@@ -48,6 +51,53 @@ namespace VacationManager.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser()
+        {
+            /*var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            EditUserAccountModel editUser = new EditUserAccountModel()
+            {
+                UserId = userId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Username = user.UserName
+            };
+            return View(editUser);*/
+
+            string username = User.Identity.Name;
+            ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
+            EditUserAccountModel editUser = new EditUserAccountModel()
+            {
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Username = user.UserName
+            };
+            return View(editUser);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserAccountModel userAccountModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string username = User.Identity.Name;
+                ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
+                user.FirstName = userAccountModel.FirstName;
+                user.LastName = userAccountModel.LastName;
+                user.Email = userAccountModel.Email;
+                user.UserName = userAccountModel.Username;
+
+                //_context.Entry(user).State = EntityState.Modified;
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
