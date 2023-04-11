@@ -56,18 +56,7 @@ namespace VacationManager.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser()
         {
-            /*var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _userManager.FindByIdAsync(userId).Result;
-            EditUserAccountModel editUser = new EditUserAccountModel()
-            {
-                UserId = userId,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Username = user.UserName
-            };
-            return View(editUser);*/
-
+         
             string username = User.Identity.Name;
             ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
             EditUserAccountModel editUser = new EditUserAccountModel()
