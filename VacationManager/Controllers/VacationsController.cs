@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VacationManager.Data;
 using VacationManager.Models;
+using VacationManager.Models.AdditionalModels;
 
 namespace VacationManager.Controllers
 {
@@ -48,7 +49,6 @@ namespace VacationManager.Controllers
         // GET: Vacations/Create
         public IActionResult Create()
         {
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -57,16 +57,43 @@ namespace VacationManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,StartDate,EndDate,RequestCreationDate,HalfDayVacation,Approved,VacationOption,FilePath")] Vacation vacation)
+        public async Task<IActionResult> Create(CreateVacationModel vacationModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(vacation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                if (ModelState.IsValid)
+                {
+                    string username = User.Identity.Name;
+                    ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
+
+                    Vacation vacation = new Vacation()
+                    {
+                        ApplicationUserId = user.Id,
+                        StartDate = vacationModel.StartDate,
+                        EndDate = vacationModel.EndDate,
+                        RequestCreationDate = vacationModel.RequestCreationDate,
+                        HalfDayVacation = vacationModel.HalfDayVacation,
+                        VacationOption = vacationModel.VacationOption,
+                        Approved =  false,
+                        FilePath = vacationModel.FilePath
+                    };
+                    _context.Vacations.Add(vacation);
+                    _context.SaveChanges();
+                    TempData["successMessage"] = "Vacation created successfully";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["errorMessage"] = "Model data is not valid";
+                    return View();
+                }
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
-            return View(vacation);
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
         }
 
         // GET: Vacations/Edit/5
