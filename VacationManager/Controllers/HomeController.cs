@@ -30,12 +30,15 @@ namespace VacationManager.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var user = _userManager.FindByIdAsync(userId).Result;
                 var userRoles = await _userManager.GetRolesAsync(user);
+            var team = await _context.Teams.Include(t => t.Project).FirstOrDefaultAsync(t => t.Id == user.TeamId);
                 HomePageModel model = new HomePageModel()
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
                     Username = user.UserName,
+                    Team = team.Name,
+                    Project = _context.Projects.Include(p => p.Teams).FirstOrDefaultAsync(p=>p.Id == team.ProjectId).Result.Name,
                     Role = userRoles[0]
                 };
             
