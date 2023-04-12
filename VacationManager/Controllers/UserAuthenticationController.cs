@@ -28,7 +28,7 @@ namespace VacationManager.Controllers
             model.Role = "unassigned";
             var result = await _service.RegistrationAsync(model);
             TempData["msg"] = result.Message;
-            return RedirectToAction(nameof(Registration));
+            return RedirectToAction(nameof(Login));
         }
 
         public IActionResult Login()

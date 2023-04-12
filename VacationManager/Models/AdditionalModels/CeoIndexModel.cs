@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp;
+using System.ComponentModel.DataAnnotations;
 
 namespace VacationManager.Models.AdditionalModels
 {
