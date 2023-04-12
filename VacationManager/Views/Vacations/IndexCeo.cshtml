@@ -10,12 +10,13 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    <h1>CEO</h1>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
@@ -41,13 +42,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @string.Format($"{item.StartDate.ToString("dd/MM/yyyy")}")
+                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
             </td>
             <td>
-                        @string.Format($"{item.EndDate.ToString("dd/MM/yyyy")}")
+                @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
-                        @string.Format($"{item.RequestCreationDate.ToString("dd/MM/yyyy")}")
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestCreationDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HalfDayVacation)
@@ -59,9 +63,8 @@
                 @Html.DisplayFor(modelItem => item.VacationOption)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="EditCeo" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="DetailsCeo" asp-route-id="@item.Id">Details</a> 
             </td>
         </tr>
 }

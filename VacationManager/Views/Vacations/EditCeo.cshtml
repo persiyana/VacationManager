@@ -1,0 +1,88 @@
+﻿@model VacationManager.Models.AdditionalModels.CeoEditUserVacationModel
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <h1>CEO</h1>
+<h4>Vacation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditCeo">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ApplicationUserName)
+            </dt>
+            <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ApplicationUserName)
+            </dd>
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.RequestCreationDate)
+            </dt>
+            <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RequestCreationDate)
+            </dd>
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.HalfDayVacation)
+            </dt>
+            <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HalfDayVacation)
+            </dd>
+            <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Approved)
+            </dt>
+            <dd class="col-sm-10">
+                     <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Approved" />
+                </label>
+            </div>
+            </dd>
+           
+            <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.VacationOption)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VacationOption)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+        <dd class = "col-sm-10">
+                <img src="~/Images/Vacations/@Model.FilePath" />
+        </dd>
+            <dd class="col-sm-10">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            </dd>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="IndexCeo">Back to List</a>
+</div>
+
+</body>
+</html>

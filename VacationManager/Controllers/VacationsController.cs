@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,103 @@ namespace VacationManager.Controllers
         // GET: Vacations
         public async Task<IActionResult> Index()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationDbContext = _context.Vacations.Where(v=> v.ApplicationUserId==userId);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> IndexCeo()
+        {
             var applicationDbContext = _context.Vacations.Include(v => v.ApplicationUser);
             return View(await applicationDbContext.ToListAsync());
+        }
+        // GET: Vacations/Edit/5
+        public async Task<IActionResult> EditCeo(int? id)
+        {
+            if (id == null || _context.Vacations == null)
+            {
+                return NotFound();
+            }
+
+            var vacation = await _context.Vacations.Include(v=>v.ApplicationUser).FirstOrDefaultAsync(v=>v.Id==id);
+            if (vacation == null)
+            {
+                return NotFound();
+            }
+            CeoEditUserVacationModel editUserVacation = new CeoEditUserVacationModel()
+            {
+                Id = vacation.Id,
+                ApplicationUserId = vacation.ApplicationUserId,
+                ApplicationUserName = vacation.ApplicationUser.UserName,
+                StartDate = vacation.StartDate,
+                EndDate = vacation.EndDate,
+                RequestCreationDate = vacation.RequestCreationDate,
+                HalfDayVacation = vacation.HalfDayVacation,
+                Approved = vacation.Approved,
+                VacationOption = vacation.VacationOption,
+                FilePath = vacation.FilePath
+            };
+            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
+            return View(editUserVacation);
+        }
+
+        // POST: Vacations/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCeo(int id, [Bind("Id,ApplicationUserId,StartDate,EndDate,RequestCreationDate,HalfDayVacation,Approved,VacationOption,FilePath")] CeoEditUserVacationModel vacationViewModel)
+        {
+            if (id != vacationViewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Vacation vacation = await _context.Vacations.FindAsync(id);
+                    vacation.Approved = vacationViewModel.Approved;
+                    _context.Update(vacation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!VacationExists(vacationViewModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IndexCeo));
+            }
+            //ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
+            //ViewData["VacationOptions"] = new SelectList(_context.Vacations, "Id", "VacationOption", vacation.VacationOption);
+            return View(vacationViewModel);
         }
 
         // GET: Vacations/Details/5
         public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Vacations == null)
+            {
+                return NotFound();
+            }
+
+            var vacation = await _context.Vacations
+                .Include(v => v.ApplicationUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vacation == null)
+            {
+                return NotFound();
+            }
+
+            return View(vacation);
+        }
+        public async Task<IActionResult> DetailsCeo(int? id)
         {
             if (id == null || _context.Vacations == null)
             {
@@ -112,8 +204,18 @@ namespace VacationManager.Controllers
             {
                 return NotFound();
             }
+            EditUserVacationModel editUserVacation = new EditUserVacationModel() {
+                Id =vacation.Id,
+                StartDate = vacation.StartDate,
+                EndDate = vacation.EndDate,
+                RequestCreationDate = vacation.RequestCreationDate,
+                HalfDayVacation = vacation.HalfDayVacation,
+                Approved = vacation.Approved,
+                VacationOption = vacation.VacationOption,
+                FilePath = vacation.FilePath
+            };
             ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
-            return View(vacation);
+            return View(editUserVacation);
         }
 
         // POST: Vacations/Edit/5
@@ -121,9 +223,9 @@ namespace VacationManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,StartDate,EndDate,RequestCreationDate,HalfDayVacation,Approved,VacationOption,FilePath")] Vacation vacation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,StartDate,EndDate,RequestCreationDate,HalfDayVacation,Approved,VacationOption,FilePath")] EditUserVacationModel vacationViewModel)
         {
-            if (id != vacation.Id)
+            if (id != vacationViewModel.Id)
             {
                 return NotFound();
             }
@@ -132,12 +234,18 @@ namespace VacationManager.Controllers
             {
                 try
                 {
+                    Vacation vacation = await _context.Vacations.FindAsync(id);
+                    vacation.StartDate = vacationViewModel.StartDate;
+                    vacation.EndDate = vacationViewModel.EndDate;
+                    vacation.RequestCreationDate = vacationViewModel.RequestCreationDate;
+                    vacation.HalfDayVacation = vacationViewModel.HalfDayVacation;
+                    vacation.VacationOption = vacationViewModel.VacationOption;
                     _context.Update(vacation);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VacationExists(vacation.Id))
+                    if (!VacationExists(vacationViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -148,9 +256,11 @@ namespace VacationManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
-            return View(vacation);
+            //ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
+            //ViewData["VacationOptions"] = new SelectList(_context.Vacations, "Id", "VacationOption", vacation.VacationOption);
+            return View(vacationViewModel);
         }
+        
 
         // GET: Vacations/Delete/5
         public async Task<IActionResult> Delete(int? id)

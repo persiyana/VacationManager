@@ -39,8 +39,8 @@
                         @Model.Teams.FirstOrDefault(t=>t.Id==i.TeamId).Name
                     </td>
                     <td>
-                        <a asp-action="EditRole" asp-route-userId="@i.Id">Edit</a> |
-                        <a asp-action="AddUserToTeam" asp-route-userId="@i.Id">AddUserToTeam</a> 
+                        <a asp-action="EditRole" asp-route-userId="@i.Id">Edit role</a> |
+                        <a asp-action="AddUserToTeam" asp-route-userId="@i.Id">Change Team</a> 
                     </td>
                 </tr>
             }

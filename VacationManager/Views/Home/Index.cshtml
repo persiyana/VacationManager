@@ -6,7 +6,7 @@
             <li><a href="/Ceo/Index">User settings</a></li>
             <li><a href="/Teams/Index">Teams information</a></li>
             <li><a href="/Projects/Index">Projects information</a></li>
-            <li><a href="/Vacations/Index">Vacations information</a></li>
+            <li><a href="/Vacations/IndexCeo">Vacations information</a></li>
     }
 </ul>
 
@@ -42,6 +42,7 @@
         @Model.Role
     </dd>
 </dl>
-<a href="Home/EditUser">Edit Profile</a><br />
-<a href="../Vacations/Create">Create new vacation</a>
+<a asp-action="EditUser">Edit Profile</a>
+<br />
+<a asp-controller="Vacations" asp-action="Index">Vacations</a>
 
