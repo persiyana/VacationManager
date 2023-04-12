@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,11 @@ namespace VacationManager.Controllers
     public class VacationsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public VacationsController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public VacationsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Vacations
@@ -66,6 +68,7 @@ namespace VacationManager.Controllers
                 {
                     string username = User.Identity.Name;
                     ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
+                    string photoName = UploadPhoto("Vacations", vacationModel.Image, _webHostEnvironment);
 
                     Vacation vacation = new Vacation()
                     {
@@ -76,7 +79,7 @@ namespace VacationManager.Controllers
                         HalfDayVacation = vacationModel.HalfDayVacation,
                         VacationOption = vacationModel.VacationOption,
                         Approved =  false,
-                        FilePath = vacationModel.FilePath
+                        FilePath = photoName
                     };
                     _context.Vacations.Add(vacation);
                     _context.SaveChanges();
@@ -178,8 +181,10 @@ namespace VacationManager.Controllers
                 return Problem("Entity set 'ApplicationDbContext.Vacations'  is null.");
             }
             var vacation = await _context.Vacations.FindAsync(id);
+            
             if (vacation != null)
             {
+                DeleteImage("Vacations", vacation.FilePath, _context, _webHostEnvironment);
                 _context.Vacations.Remove(vacation);
             }
             
@@ -190,6 +195,37 @@ namespace VacationManager.Controllers
         private bool VacationExists(int id)
         {
           return (_context.Vacations?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public static string UploadPhoto(string imageType, IFormFile formFile, IWebHostEnvironment webHostEnvironment)
+        {
+            string uniqueFileName = null;
+
+            if (formFile != null)
+            {
+                string photosFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", imageType);
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
+                string photoPathAndName = Path.Combine(photosFolder, uniqueFileName);
+
+                Directory.CreateDirectory(photosFolder);
+                using FileStream fileStream = new(photoPathAndName, FileMode.Create);
+
+                formFile.CopyTo(fileStream);
+            }
+
+            return uniqueFileName;
+        }
+        public static async Task<bool> DeleteImage(string imageType, string imageUrl, ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        {
+            string profilePhotoFileName = Path.Combine(webHostEnvironment.WebRootPath, "Images", imageType, imageUrl);
+
+           
+                if (System.IO.File.Exists(profilePhotoFileName))
+                {
+                    System.IO.File.Delete(profilePhotoFileName);
+                    return true;
+                }
+            
+            return false;
         }
     }
 }

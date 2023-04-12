@@ -12,6 +12,6 @@ namespace VacationManager.Models.AdditionalModels
         public DateTime RequestCreationDate { get; set; }
         public bool HalfDayVacation { get; set; }
         public VacationOption VacationOption { get; set; }
-        public string? FilePath { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

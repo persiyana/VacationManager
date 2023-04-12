@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Styles\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>
