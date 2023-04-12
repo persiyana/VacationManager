@@ -28,8 +28,8 @@ namespace VacationManager.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var user = _userManager.FindByIdAsync(userId).Result;
-                var userRoles = await _userManager.GetRolesAsync(user);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            var userRoles = await _userManager.GetRolesAsync(user);
             var team = await _context.Teams.Include(t => t.Project).FirstOrDefaultAsync(t => t.Id == user.TeamId);
                 HomePageModel model = new HomePageModel()
                 {
@@ -81,10 +81,6 @@ namespace VacationManager.Controllers
                 ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.Equals(username));
                 user.FirstName = userAccountModel.FirstName;
                 user.LastName = userAccountModel.LastName;
-                user.Email = userAccountModel.Email;
-                user.UserName = userAccountModel.Username;
-
-                //_context.Entry(user).State = EntityState.Modified;
                 _context.Update(user);
                 await _context.SaveChangesAsync();
             }

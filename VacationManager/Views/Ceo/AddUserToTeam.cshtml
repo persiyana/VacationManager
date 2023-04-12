@@ -20,7 +20,7 @@
         </select>
         <span asp-validation-for="TeamName" class="text-danger"></span>
     </div>
-    <a href="/Teams/Create">Create team</a>
+    <a asp-action="Create" asp-controller="Teams">Create team</a>
     <div class="form-group row">
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary" asp-route-email="@Model.Email">Update</button>

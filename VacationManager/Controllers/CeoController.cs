@@ -35,7 +35,6 @@ namespace VacationManager.Controllers
                 Teams = _context.Teams.Include(t=>t.ApplicationUsers).ToList()
             };
             model.AddToList();
-            //var result = _context.Users.ToList();
             return View(model);
         }
         [HttpGet]
@@ -87,7 +86,6 @@ namespace VacationManager.Controllers
                 if(user != null)
                 {
                     user.TeamId = teamId;
-                    //user.Team = team;
                     _context.ApplicationUsers.Update(user);
                     team.ApplicationUsers.Add(user);
                     await _context.SaveChangesAsync();

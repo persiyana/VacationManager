@@ -256,8 +256,6 @@ namespace VacationManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
-            //ViewData["VacationOptions"] = new SelectList(_context.Vacations, "Id", "VacationOption", vacation.VacationOption);
             return View(vacationViewModel);
         }
         

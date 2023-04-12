@@ -3,10 +3,10 @@
 <ul>
     @if (User.IsInRole("CEO"))
     {
-            <li><a href="/Ceo/Index">User settings</a></li>
-            <li><a href="/Teams/Index">Teams information</a></li>
-            <li><a href="/Projects/Index">Projects information</a></li>
-            <li><a href="/Vacations/IndexCeo">Vacations information</a></li>
+            <li><a asp-controller="Ceo" asp-action="Index">User settings</a></li>
+        <li><a asp-controller="Teams" asp-action="Index">Teams information</a></li>
+        <li><a asp-controller="Projects" asp-action="Index">Projects information</a></li>
+        <li><a asp-controller="Vacations" asp-action="IndexCeo">Vacations information</a></li>
     }
 </ul>
 

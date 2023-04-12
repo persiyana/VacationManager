@@ -30,14 +30,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>Email (you won't be able to change it afterwards)</label>
                         <input type="text" class="form-control" asp-for="Email" />
                         <span class="text-danger" asp-validation-for="Email"></span>
 
                     </div>
 
                     <div class="form-group">
-                        <label>Username</label>
+                        <label>Username (you won't be able to change it afterwards)</label>
                         <input type="text" class="form-control" asp-for="Username" />
                         <span class="text-danger" asp-validation-for="Username"></span>
 
@@ -67,7 +67,7 @@
                     }
 
                     <button type="submit" class="btn btn-info">Registration</button>
-                    <a class="btn btn-primary" href="/UserAuthentication/Login">Login</a>
+                    <a class="btn btn-primary" asp-action="Login">Login</a>
                 </form>
             </div>
         </div>

@@ -10,10 +10,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../Home/Index">Vacation Manager</a>
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">Vacation Manager</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="/UserAuthentication/Logout">Logout</a></li>
+                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a asp-action="Login" asp-controller="UserAuthentication">Logout</a></li>
             </ul>
         </div>
     </nav>

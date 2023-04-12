@@ -1,4 +1,5 @@
-﻿using VacationManager.Models.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using VacationManager.Models.Enums;
 
 namespace VacationManager.Models.AdditionalModels
 {

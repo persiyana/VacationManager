@@ -26,19 +26,19 @@
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
+                @string.Format($"{Model.StartDate.ToString("dd/MM/yyyy")}")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.EndDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
+                @string.Format($"{Model.EndDate.ToString("dd/MM/yyyy")}")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RequestCreationDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RequestCreationDate)
+                @string.Format($"{Model.RequestCreationDate.ToString("dd/MM/yyyy")}")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.HalfDayVacation)
@@ -68,7 +68,7 @@
 </div>
 <div>
     <a asp-action="EditCeo" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="IndexCeo">Back to List</a>
 </div>
 </body>
 </html>
