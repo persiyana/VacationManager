@@ -4,23 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vacation Manager</title>
+        
     <link href="~/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" asp-action="Index" asp-controller="Home">Vacation Manager</a>
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                Vacation Manager
             </div>
-            <ul class="nav navbar-nav">
-                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li><a asp-action="Login" asp-controller="UserAuthentication">Logout</a></li>
-            </ul>
         </div>
-    </nav>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <div class="nav-links">
+            <a asp-action="Index" asp-controller="Home">Home</a>
+            <a asp-action="Login" asp-controller="UserAuthentication">Logout</a>
+        </div>
+    </div>
+
     <div class="container">
         @RenderBody()
     </div>
