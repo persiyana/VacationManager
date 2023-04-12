@@ -10,78 +10,66 @@
     <title>Edit</title>
 </head>
 <body>
-    <h1>CEO</h1>
-<h4>Vacation</h4>
-<hr />
+<h1>Approve vacation</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditCeo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.ApplicationUserName)
-            </dt>
-            <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.ApplicationUserName)
-            </dd>
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.StartDate)
-            </dt>
-            <dd class="col-sm-10">
-                    @string.Format($"{Model.StartDate.ToString("dd/MM/yyyy")}")
-            </dd>
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.EndDate)
-            </dt>
-            <dd class="col-sm-10">
-                    @string.Format($"{Model.EndDate.ToString("dd/MM/yyyy")}")
-            </dd>
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.RequestCreationDate)
-            </dt>
-            <dd class="col-sm-10">
-                    @string.Format($"{Model.RequestCreationDate.ToString("dd/MM/yyyy")}")
-            </dd>
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.HalfDayVacation)
-            </dt>
-            <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.HalfDayVacation)
-            </dd>
-            <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Approved)
-            </dt>
-            <dd class="col-sm-10">
-                     <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Approved" />
-                </label>
+                <table id="vacationInfo">
+                    <tr>
+                        <td>Username:</td>
+                        <td>@Html.DisplayFor(model => model.ApplicationUserName)</td>
+                    </tr>
+                    <tr>
+                        <td>Start date:</td>
+                        <td>@string.Format($"{Model.StartDate.ToString("dd/MM/yyyy")}")</td>
+                    </tr>
+                    <tr>
+                        <td>End date:</td>
+                        <td>@string.Format($"{Model.EndDate.ToString("dd/MM/yyyy")}")</td>
+                    </tr>
+                    <tr>
+                        
+                        <td>Request creation date:</td>
+                        <td>
+                            @string.Format($"{Model.RequestCreationDate.ToString("dd/MM/yyyy")}")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Half day vacation:</td>
+                        <td>
+                            <div class="form-group form-check">
+                                <input class="form-check-input checkbox" asp-for="HalfDayVacation" disabled />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vacation option:</td>
+                        <td>@Html.DisplayFor(model => model.VacationOption)</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:red;">*</strong>Approved:</td>
+                        <td>
+                            <div class="form-group form-check">
+                                <input class="form-check-input checkbox" asp-for="Approved" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>File:</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+        <img src="~/Images/Vacations/@Model.FilePath" />
+        
+            <div class="second-form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="IndexCeo">Back to List</a>
             </div>
-            </dd>
-           
-            <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.VacationOption)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VacationOption)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.FilePath)
-        </dt>
-        <dd class = "col-sm-10">
-                <img src="~/Images/Vacations/@Model.FilePath" />
-        </dd>
-            <dd class="col-sm-10">
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-            </dd>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="IndexCeo">Back to List</a>
 </div>
 
 </body>

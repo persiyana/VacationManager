@@ -4,7 +4,7 @@
     ViewBag.Title = "Add user to team";
 }
 
-<h1>Edit Role</h1>
+<h1>Change user team</h1>
 
 <form method="post" class="mt-3">
     <div class="form-group row">
@@ -21,9 +21,9 @@
         <span asp-validation-for="TeamName" class="text-danger"></span>
     </div>
     <a asp-action="Create" asp-controller="Teams">Create team</a>
-    <div class="form-group row">
-        <div class="col-sm-10">
+    <div class="second-form-group row">
             <button type="submit" class="btn btn-primary" asp-route-email="@Model.Email">Update</button>
-        </div>
+            <a asp-action="Index">Back to List</a>
+
     </div>
 </form>

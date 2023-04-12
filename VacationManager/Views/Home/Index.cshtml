@@ -1,60 +1,49 @@
 ﻿@model VacationManager.Models.AdditionalModels.HomePageModel;
 
-<ul>
-    @if (User.IsInRole("CEO"))
-    {
-            <li><a asp-controller="Ceo" asp-action="Index">User settings</a></li>
-        <li><a asp-controller="Teams" asp-action="Index">Teams information</a></li>
-        <li><a asp-controller="Projects" asp-action="Index">Projects information</a></li>
-        <li><a asp-controller="Vacations" asp-action="IndexCeo">Vacations information</a></li>
-    }
-</ul>
 
-<dl class="row">
-    <dt class="col-sm-2">
-        Username:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.Username
-    </dd>
-    <dt class="col-sm-2">
-        First name:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.FirstName
-    </dd>
-    <dt class="col-sm-2">
-        Last name:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.LastName
-    </dd>
-    <dt class="col-sm-2">
-        Email:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.Email
-    </dd>
-    <dt class="col-sm-2">
-        Role:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.Role
-    </dd>
-    <dt class="col-sm-2">
-        Team:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.Team
-    </dd>
-    <dt class="col-sm-2">
-        Project:
-    </dt>
-    <dd class="col-sm-10">
-        @Model.Project
-    </dd>
-</dl>
-<a asp-action="EditUser">Edit Profile</a>
-<br />
-<a asp-controller="Vacations" asp-action="Index">Vacations</a>
+    @if (User.IsInRole("CEO"))
+    {<div id="buttons">
+        <a asp-controller="Ceo" asp-action="Index" class="btn">User settings</a>
+        <a asp-controller="Teams" asp-action="Index" class="btn">Teams information</a>
+        <a asp-controller="Projects" asp-action="Index" class="btn">Projects information</a>
+        <a asp-controller="Vacations" asp-action="IndexCeo" class="btn">Vacations information</a>
+    </div>
+            
+    }
+
+    <table id="userInfo">
+    <tr>
+        <td>Username:</td>
+        <td class="darker">@Model.Username</td>
+    </tr>
+    <tr>
+        <td>First name:</td>
+        <td class="darker">@Model.FirstName</td>
+    </tr>
+    <tr>
+        <td>Last name:</td>
+        <td class="darker">@Model.LastName</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td class ="darker">@Model.Email</td>
+    </tr>
+    <tr>
+        <td>Role:</td>
+        <td class="darker">@Model.Role</td>
+    </tr>
+    <tr>
+        <td>Team:</td>
+        <td class="darker">@Model.Team</td>
+    </tr>
+    <tr>
+        <td>Project:</td>
+        <td class="darker">@Model.Project</td>
+    </tr>
+    </table>
+
+<div id="buttons">
+    <a asp-action="EditUser" class="btn">Edit Profile</a>
+    <a asp-controller="Vacations" asp-action="Index" class="btn">Edit your vacations</a>
+</div>
 

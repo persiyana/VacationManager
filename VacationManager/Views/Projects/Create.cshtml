@@ -12,8 +12,8 @@
     <title>Create</title>
 </head>
 <body>
-    <h3>@ViewData["Title"]</h3>
-    <hr />
+    <h1>Create project</h1>
+
     @if (!string.IsNullOrWhiteSpace(errorMessage))
     {
         <div clss="alert alert-danger">
@@ -32,14 +32,12 @@
             <input type="text" class="form-control" asp-for="Description" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="d-grid">
+        <div class="second-form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index">Back to List</a>
         </div>
     </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 </body>
 </html>

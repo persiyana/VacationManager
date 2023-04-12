@@ -54,10 +54,10 @@
                @string.Format($"{item.RequestCreationDate.ToString("dd/MM/yyyy")}")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HalfDayVacation)
+                        <input class="form-check-input checkbox" asp-for="@item.HalfDayVacation" disabled />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Approved)
+                        <input class="form-check-input checkbox" asp-for="@item.Approved" disabled />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VacationOption)
