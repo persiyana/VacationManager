@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,12 +31,14 @@ namespace VacationManager.Controllers
             var applicationDbContext = _context.Vacations.Where(v=> v.ApplicationUserId==userId);
             return View(await applicationDbContext.ToListAsync());
         }
+        [Authorize(Roles = "CEO")]
         public async Task<IActionResult> IndexCeo()
         {
             var applicationDbContext = _context.Vacations.Include(v => v.ApplicationUser);
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Vacations/Edit/5
+        [Authorize(Roles = "CEO")]
         public async Task<IActionResult> EditCeo(int? id)
         {
             if (id == null || _context.Vacations == null)
@@ -122,6 +125,7 @@ namespace VacationManager.Controllers
 
             return View(vacation);
         }
+        [Authorize(Roles = "CEO")]
         public async Task<IActionResult> DetailsCeo(int? id)
         {
             if (id == null || _context.Vacations == null)
