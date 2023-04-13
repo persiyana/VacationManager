@@ -9,7 +9,8 @@
     <title>Index</title>
 </head>
 <body>
-    <table class="table">
+    <h1>User settings</h1>
+    <table class="indexTable">
         <thead>
             <tr>
                 <th>
@@ -45,8 +46,8 @@
                             <td>@Model.Teams.FirstOrDefault(t => t.Id == i.TeamId).Name</td>
                         }
                     <td>
-                        <a asp-action="EditRole" asp-route-userId="@i.Id">Edit role</a> |
-                        <a asp-action="AddUserToTeam" asp-route-userId="@i.Id">Change Team</a> 
+                        <a asp-action="EditRole" class="indexButton blue" asp-route-userId="@i.Id">Edit role</a> 
+                        <a asp-action="AddUserToTeam" class="indexButton blue" asp-route-userId="@i.Id">Change Team</a>
                     </td>
                 </tr>
             }

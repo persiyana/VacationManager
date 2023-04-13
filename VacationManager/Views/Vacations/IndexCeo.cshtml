@@ -10,30 +10,26 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>CEO</h1>
-<table class="table">
+    <h1>Vacations of the workers</h1>
+    <table class="indexTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser)
+                Worker username
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                    Request creation date
+                </th>
+            
+            
+                <th>
+                    Vacation option
+                </th>
+            <th>
+                Half day vacation
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequestCreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HalfDayVacation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Approved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VacationOption)
+                Approved
             </th>
             <th></th>
         </tr>
@@ -44,28 +40,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
             </td>
-            <td>
-                 @string.Format($"{item.StartDate.ToString("dd/MM/yyyy")}")
-            </td>
-            <td>
-               @string.Format($"{item.EndDate.ToString("dd/MM/yyyy")}")
-            </td>
-            <td>
-               @string.Format($"{item.RequestCreationDate.ToString("dd/MM/yyyy")}")
-            </td>
-            <td>
+                    <td>
+                        @string.Format($"{item.RequestCreationDate.ToString("dd/MM/yyyy")}")
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacationOption)
+                    </td>
+                    <td>
                         <input class="form-check-input checkbox" asp-for="@item.HalfDayVacation" disabled />
-            </td>
-            <td>
+                    </td>
+                    <td>
                         <input class="form-check-input checkbox" asp-for="@item.Approved" disabled />
-            </td>
+                    </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VacationOption)
-            </td>
-            <td>
-                <a asp-action="EditCeo" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="DetailsCeo" asp-route-id="@item.Id">Details</a> 
-            </td>
+                        <a asp-action="EditCeo" class="indexButton blue" asp-route-id="@item.Id">Edit</a> 
+                        <a asp-action="DetailsCeo" class="indexButton purple" asp-route-id="@item.Id">Details</a>
+                    </td>
         </tr>
 }
     </tbody>

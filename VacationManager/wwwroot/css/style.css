@@ -10,6 +10,15 @@ h1, .alert {
 h1{
     font-size:1.6em;
 }
+.h1Button h1 {
+    position: relative;
+    top: -0.6em;
+}
+.h1Button .btn {
+    position: relative;
+    top: 2em;
+    left: 1em;
+}
 html {
     height: 100%;
 }
@@ -193,14 +202,17 @@ form {
         margin-left:0;
         display:inline-block;
     }
-    form input, form select, form img{
-        width:100%;
+    form input, form select, form img, form textarea {
+        width: 100%;
     }
-    form .second-form-group {
-        display: flex;
-        flex-direction: row;
-        margin-top: 0.4em;
-    }
+        form textarea{
+            height: 8em;
+        }
+        form .second-form-group {
+            display: flex;
+            flex-direction: row;
+            margin-top: 0.4em;
+        }
         form .second-form-group a {
             margin: 0 0 0 auto;
             margin-top:0.7em;
@@ -290,4 +302,35 @@ form table{
         color: #666666;
     }
 
-
+.indexTable {
+    position: relative;
+    margin: 0 auto;
+}
+.indexProjectDescription{
+    width:20em;
+}
+.indexTable th {
+    font-style: italic;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+.indexTable td {
+    text-align: center;
+    vertical-align:baseline;
+}
+.indexButton {
+    text-decoration: none;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 15px 15px;
+    margin: 0.1em;
+}
+.indexTable .pink {
+    background-color: #810276;
+}
+.indexTable .purple {
+    background-color: #470288;
+}
+.indexTable .blue {
+    background-color: #180093;
+}

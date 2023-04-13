@@ -10,10 +10,11 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    <div class="h1Button">
+        <a asp-action="Create" class="btn">Create New</a>
+        <h1>List of teams</h1>
+    </div>
+<table class="indexTable">
     <thead>
         <tr>
             <th>
@@ -40,11 +41,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Leader.UserName)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                    <td>
+                                <a asp-action="Edit" class="indexButton blue" asp-route-id="@item.Id">Edit</a>
+                                <a asp-action="Details" class="indexButton purple" asp-route-id="@item.Id">Details</a>
+                                <a asp-action="Delete" class="indexButton pink" asp-route-id="@item.Id">Delete</a>
+                    </td>
         </tr>
 }
     </tbody>
