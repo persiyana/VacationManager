@@ -11,6 +11,7 @@ namespace VacationManager.Models
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser? ApplicationUser { get; set; }
         [Required(ErrorMessage = "Start date is required.")]
+        [Display(Name ="Start date:")]
         public DateTime StartDate { get; set; }
         [Required(ErrorMessage = "End date is required.")]
         public DateTime EndDate { get; set; }

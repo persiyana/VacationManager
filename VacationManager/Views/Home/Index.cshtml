@@ -34,11 +34,31 @@
     </tr>
     <tr>
         <td>Team:</td>
-        <td class="darker">@Model.Team</td>
+        <td class="darker">
+            @if (Model.Team != "")
+            {
+                @Model.Team
+
+            }
+            else
+            {
+                <i>none</i>
+            }
+        </td>
     </tr>
     <tr>
         <td>Project:</td>
-        <td class="darker">@Model.Project</td>
+        <td class="darker">
+            @if (Model.Project != "")
+            {
+                @Model.Project
+
+            }
+            else
+            {
+                <i>none</i>
+            }
+        </td>
     </tr>
     </table>
 

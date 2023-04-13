@@ -18,10 +18,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project)
+                Project
             </th>
             <th>
                 Leader username
@@ -36,7 +36,15 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Project.Description)
+                @if (item.Project !=null )
+                    {
+                        <p>	&diams; @item.Project.Name</p>
+                       
+                    }
+                    else
+                    {
+                        <i>none</i>
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Leader.UserName)

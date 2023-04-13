@@ -11,10 +11,12 @@ namespace VacationManager.Models.AdditionalModels
         }
 
         public string? Id { get; set; }
-
+        [Display(Name = "Role:")]
         public string? RoleName { get; set; }
         public SelectList? Roles { get; set; }
+        [Display(Name = "Username:")]
         public string? Username { get; set; }
+        [Display(Name = "Email:")]
         public string Email { get; set; }
         public List<string>? Users { get; set; }
 

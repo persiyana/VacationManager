@@ -20,7 +20,17 @@
             </tr>
             <tr>
                 <td>Project:</td>
-                <td class="darker">@Html.DisplayFor(model => model.Project.Name)</td>
+                <td class="darker">
+                    @if (Model.Project !=null )
+                    {
+                        <p>	&diams; @Model.Project.Name</p>
+                       
+                    }
+                    else
+                    {
+                        <i>none</i>
+                    }
+                </td>
             </tr>
             <tr>
                 <td>Leader:</td>

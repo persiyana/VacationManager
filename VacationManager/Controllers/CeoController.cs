@@ -44,7 +44,8 @@ namespace VacationManager.Controllers
             EditRoleViewModel viewModel = new EditRoleViewModel()
             {
                 Id = _userManager.FindByIdAsync(userId).Result.Id,
-                Email = _userManager.FindByIdAsync(userId).Result.Email
+                Email = _userManager.FindByIdAsync(userId).Result.Email,
+                Username = _userManager.FindByIdAsync(userId).Result.UserName
             };
             return View(viewModel);
         }
@@ -69,7 +70,8 @@ namespace VacationManager.Controllers
             AddUserToTeamModel toTeam =  new AddUserToTeamModel()
             {
                 UserId = _userManager.FindByIdAsync(userId).Result.Id,
-                Email = _userManager.FindByIdAsync(userId).Result.Email
+                Email = _userManager.FindByIdAsync(userId).Result.Email,
+                UserName = _userManager.FindByIdAsync(userId).Result.UserName
             };
            
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
