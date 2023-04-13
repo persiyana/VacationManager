@@ -12,41 +12,41 @@
 <body>
 
 <div>
-    <h4>Team</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Project.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Leader)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Leader.UserName)
-        </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ApplicationUsers)
-            </dt>
-            <dd class="col-sm-10">
-                @foreach (var item in Model.ApplicationUsers)
-                {
-                    <p>@item.UserName</p>
-                }
-            </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index" asp-controller="Ceo">Add new user to team</a> |
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <h1>Team</h1>
+        <table class="detailsTable">
+            <tr>
+                <td>Name:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td>Project:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Project.Name)</td>
+            </tr>
+            <tr>
+                <td>Leader:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Leader.UserName)</td>
+            </tr>
+            <tr>
+                <td>Team members:</td>
+                <td class="darker">
+                    <br />
+                    @if (Model.ApplicationUsers.Count > 0)
+                    {
+                        foreach (var item in Model.ApplicationUsers)
+                        {
+                            @item.UserName <br />
+                        }
+                    }
+                    else
+                    {
+                        <i>none</i>
+                    }
+                </td>
+            </tr>
+        </table>
+<div class="detailsDiv">
+            <a asp-action="Index" class="indexButton yellow" asp-controller="Ceo">Add new user to team</a>
+            <a asp-action="Edit" class="indexButton yellow" asp-route-id="@Model?.Id">Edit</a>
     <a asp-action="Index">Back to List</a>
 </div>
 </body>

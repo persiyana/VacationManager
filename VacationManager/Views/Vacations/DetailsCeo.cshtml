@@ -12,63 +12,48 @@
 <body>
 
 <div>
-    <h1>CEO</h1>
-    <h4>Vacation</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser.UserName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-                @string.Format($"{Model.StartDate.ToString("dd/MM/yyyy")}")
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-                @string.Format($"{Model.EndDate.ToString("dd/MM/yyyy")}")
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RequestCreationDate)
-        </dt>
-        <dd class = "col-sm-10">
-                @string.Format($"{Model.RequestCreationDate.ToString("dd/MM/yyyy")}")
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HalfDayVacation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HalfDayVacation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Approved)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Approved)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VacationOption)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VacationOption)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FilePath)
-        </dt>
-        <dd class = "col-sm-10">
-                <img src="~/Images/Vacations/@Model.FilePath" />
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="EditCeo" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="IndexCeo">Back to List</a>
-</div>
+        <h1>Vacation details of user</h1>
+        <table class="detailsTable">
+            <tr>
+                <td>Username:</td>
+                <td class="darker">@Html.DisplayFor(model => model.ApplicationUser.UserName)</td>
+            </tr>
+            <tr>
+                <td>Request creation date:</td>
+                <td class="darker">@string.Format($"{Model.RequestCreationDate.ToString("dd/MM/yyyy")}")</td>
+            </tr>
+            <tr>
+                <td>Start date:</td>
+                <td class="darker">@string.Format($"{Model.StartDate.ToString("dd/MM/yyyy")}")</td>
+            </tr>
+            <tr>
+                <td>End date:</td>
+                <td class="darker">@string.Format($"{Model.EndDate.ToString("dd/MM/yyyy")}")</td>
+            </tr>
+            <tr>
+                <td>Vacation option:</td>
+                <td class="darker">@Html.DisplayFor(model => model.VacationOption)</td>
+            </tr>
+            <tr>
+                <td>Half day vacation:</td>
+                <td class="darker">@Html.DisplayFor(model => model.HalfDayVacation)</td>
+            </tr>
+            <tr>
+                <td>Approved:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Approved)</td>
+            </tr>
+            <tr>
+                <td>File:</td>
+                <td class="darker"></td>
+            </tr>
+        </table>
+
+
+        <div class="detailsDiv">
+            <img src="~/Images/Vacations/@Model.FilePath" />
+            <a asp-action="EditCeo" class="indexButton yellow" asp-route-id="@Model?.Id">Edit</a>
+            <a asp-action="IndexCeo">Back to List</a>
+        </div>
+    
 </body>
 </html>

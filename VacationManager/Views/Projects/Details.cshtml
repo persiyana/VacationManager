@@ -12,36 +12,40 @@
 <body>
 
 <div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            Teams
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var item in Model.Teams)
-            {
-                <p>@item.Name</p>
-            }
-        </dd>
-    </dl>
-</div>
-<div>
-        <a asp-controller="Teams" asp-action="Index">Add team to a project</a> | 
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <h1>Project</h1>
+        <table class="detailsTable">
+            <tr>
+                <td>Name:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td class="darker">@Html.DisplayFor(model => model.Description)</td>
+            </tr>
+            <tr>
+                <td>Teams:</td>
+                <td class="darker">
+                    <br />
+                    @if(Model.Teams.Count > 0)
+                    {
+                        foreach (var item in Model.Teams)
+                        {
+                            @item.Name <br />
+                        }
+                    }
+                    else
+                    {
+                        <i>none</i>
+                    }
+
+                </td>
+            </tr>
+        </table>
+        <div class="detailsDiv">
+            <a asp-action="Index" class="indexButton yellow" asp-controller="Teams">Add team to a project</a>
+            <a asp-action="Edit" class="indexButton yellow" asp-route-id="@Model?.Id">Edit</a>
+            <a asp-action="Index">Back to List</a>
+            </div>
+   
 </body>
 </html>

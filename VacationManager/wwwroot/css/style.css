@@ -7,9 +7,13 @@
 h1, .alert {
     text-align: center;
 }
-h1{
-    font-size:1.6em;
-}
+    .alert{
+        color:red;
+    }
+    h1 {
+        font-size: 1.6em;
+    }
+
 .h1Button h1 {
     position: relative;
     top: -0.6em;
@@ -40,22 +44,41 @@ body {
     flex-direction: row;
     justify-content: center;
 }
-#userInfo td{
-    width:11rem;
-}
-    #userInfo .darker {
-        color: #d6d2cfd9;
+    #userInfo td {
+        width: 11rem;
     }
-#buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 80%;
-    min-height: 100%;
-    margin: 0 auto;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-}
+    #userInfo .darker, .detailsTable .darker {
+        color: #d6d2cfd9;
+        
+    }
+        .detailsTable .darker{
+text-align: right;
+        }
+        .detailsTable, .detailsDiv {
+            margin: 0 auto;
+            width: 30%;
+        }
+        .detailsTable td{
+            vertical-align:baseline;
+        }
+    .detailsDiv{
+        margin-top:1em;
+        text-align:center;
+    }
+        .detailsDiv img{
+            width:100%;
+        }
+
+        #buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 80%;
+            min-height: 100%;
+            margin: 0 auto;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
 
 .btn {
     color: #d6d2cf;
@@ -325,12 +348,15 @@ form table{
     border-radius: 15px 15px;
     margin: 0.1em;
 }
-.indexTable .pink {
+.pink {
     background-color: #810276;
 }
-.indexTable .purple {
+.purple {
     background-color: #470288;
 }
-.indexTable .blue {
+.blue {
     background-color: #180093;
+}
+.yellow {
+    background-color: #939000;
 }
