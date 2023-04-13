@@ -32,11 +32,13 @@
             </tr>
             <tr>
                 <td>Half day vacation:</td>
-                <td class="darker">@Html.DisplayFor(model => model.HalfDayVacation)</td>
+                <td class="darker"><input class="form-check-input  checkbox" asp-for="@Model.HalfDayVacation" disabled /></td>
+
             </tr>
             <tr>
                 <td>Approved:</td>
-                <td class="darker">@Html.DisplayFor(model => model.Approved)</td>
+                <td class="darker"><input class="form-check-input  checkbox" asp-for="@Model.Approved" disabled /></td>
+
             </tr>
             <tr>
                 <td>File:</td>

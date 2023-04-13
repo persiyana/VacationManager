@@ -22,6 +22,7 @@ h1, .alert {
     position: relative;
     top: 2em;
     left: 1em;
+    z-index:100;
 }
 html {
     height: 100%;
@@ -43,6 +44,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top:2em;
 }
     #userInfo td {
         width: 11rem;
@@ -65,8 +67,9 @@ text-align: right;
         margin-top:1em;
         text-align:center;
     }
-        .detailsDiv img{
-            width:100%;
+        .detailsDiv img {
+            
+            width: 100%;
         }
 
         #buttons {
