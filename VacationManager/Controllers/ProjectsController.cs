@@ -171,10 +171,17 @@ namespace VacationManager.Controllers
             var project = await _context.Projects.FindAsync(id);
             if (project != null)
             {
+                var teams = _context.Teams.ToListAsync().Result.Where(t=>project.Teams.Select(p=>p.ProjectId).Any(p=>t.ProjectId==p)).ToList();
+                for (int i = 0; i < teams.Count; i++)
+                {
+                    teams[i].ProjectId = null;
+                }
+                project.Teams=new List<Team>();
+                _context.SaveChanges();
                 _context.Projects.Remove(project);
             }
             
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

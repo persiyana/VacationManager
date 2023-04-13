@@ -19,6 +19,7 @@ namespace VacationManager.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Team>().HasOne(t => t.Leader).WithOne(u => u.Team).OnDelete(DeleteBehavior.Restrict).HasForeignKey<Team>(m => m.LeaderId);
             modelBuilder.Entity<Vacation>().HasOne(v => v.ApplicationUser).WithMany(u => u.Vacations).HasForeignKey(m => m.ApplicationUserId);
+            
         }
     }
 }

@@ -12,8 +12,7 @@ namespace VacationManager.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Project is required.")]
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
         public virtual Project? Project { get; set; }
         [Required(ErrorMessage = "Leader is required.")]
         public string LeaderId { get; set; }

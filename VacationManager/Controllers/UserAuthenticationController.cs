@@ -63,7 +63,7 @@ namespace VacationManager.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        
+
         /*public async Task<IActionResult> CeoReg()
         {
             try
@@ -74,11 +74,11 @@ namespace VacationManager.Controllers
                     var model = new RegistrationModel()
                     {
                         Role = "ceo",
-                        Username = "ceo",
-                        Email = "ceo@gmail.com",
-                        Password = "Ceo@123",
-                        FirstName = "ceo",
-                        LastName = "ceo"
+                        Username = "petur_ivanov",
+                        Email = "petur_ivanov@gmail.com",
+                        Password = "Petur@123",
+                        FirstName = "Petur",
+                        LastName = "Ivanov"
                     };
                     model.Role = "ceo";
                     var result = await _service.RegistrationAsync(model);

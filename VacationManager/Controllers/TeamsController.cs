@@ -163,10 +163,17 @@ namespace VacationManager.Controllers
             var team = await _context.Teams.FindAsync(id);
             if (team != null)
             {
+                var users = _context.ApplicationUsers.ToListAsync().Result.Where(t => t.TeamId != null && t.TeamId == team.Id).ToList();
+                for (int i = 0; i < users.Count; i++)
+                {
+                    users[i].TeamId = null;
+                }
+                team.ApplicationUsers = new List<ApplicationUser>();
+                _context.SaveChanges();
                 _context.Teams.Remove(team);
             }
             
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
