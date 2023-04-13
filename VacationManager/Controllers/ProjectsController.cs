@@ -150,6 +150,7 @@ namespace VacationManager.Controllers
             }
 
             var project = await _context.Projects
+                .Include(t => t.Teams)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {
@@ -168,10 +169,11 @@ namespace VacationManager.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.Projects'  is null.");
             }
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects.Include(p=>p.Teams).FirstOrDefaultAsync(p=>p.Id==id);
             if (project != null)
             {
-                var teams = _context.Teams.ToListAsync().Result.Where(t=>project.Teams.Select(p=>p.ProjectId).Any(p=>t.ProjectId==p)).ToList();
+                var projectIds = project.Teams.Where(p=>p.ProjectId!=null).Select(s=>s.ProjectId);
+                var teams = _context.Teams.ToListAsync().Result.Where(t => projectIds.Any(p => t.ProjectId != null && p != null && t.ProjectId == p)).ToList();
                 for (int i = 0; i < teams.Count; i++)
                 {
                     teams[i].ProjectId = null;

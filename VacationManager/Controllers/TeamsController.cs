@@ -142,7 +142,9 @@ namespace VacationManager.Controllers
             var team = await _context.Teams
                 .Include(t => t.Leader)
                 .Include(t => t.Project)
+                .Include(t => t.ApplicationUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (team == null)
             {
                 return NotFound();

@@ -21,7 +21,23 @@
             <td>Description:</td>
             <td class="darker">@Html.DisplayFor(model => model.Description)</td>
         </tr>
+            <tr>
+                <td>Teams:</td>
+                <td class="darker">
+                    @if (Model.Teams.Count > 0)
+                    {
+                        foreach (var item in Model.Teams)
+                        {
+                            <p>	&diams; @item.Name</p>
+                        }
+                    }
+                    else
+                    {
+                        <i>none</i>
+                    }
 
+                </td>
+            </tr>
         </table><form asp-action="Delete" class="detailsDiv">
             <h2 class="alert">Are you sure you want to delete this?</h2>
             <input type="hidden" asp-for="Id" />

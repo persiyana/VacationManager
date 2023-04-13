@@ -74,10 +74,10 @@ namespace VacationManager.Controllers
                     var model = new RegistrationModel()
                     {
                         Role = "ceo",
-                        Username = "petur_ivanov",
-                        Email = "petur_ivanov@gmail.com",
-                        Password = "Petur@123",
-                        FirstName = "Petur",
+                        Username = "petar_ivanov",
+                        Email = "petar_ivanov@gmail.com",
+                        Password = "Petar@123",
+                        FirstName = "Petar",
                         LastName = "Ivanov"
                     };
                     model.Role = "ceo";

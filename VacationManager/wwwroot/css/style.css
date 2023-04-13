@@ -53,9 +53,12 @@ body {
         color: #d6d2cfd9;
         
     }
-        .detailsTable .darker{
-text-align: right;
-        }
+.detailsTable .darker{
+    text-align: right;
+}
+.detailsTable .darker p{
+    margin:0;
+}
         .detailsTable, .detailsDiv {
             margin: 0 auto;
             width: 30%;
@@ -362,4 +365,7 @@ form table{
 }
 .yellow {
     background-color: #939000;
+}
+.orange {
+    background-color: #935600;
 }

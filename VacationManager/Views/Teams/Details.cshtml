@@ -29,12 +29,11 @@
             <tr>
                 <td>Team members:</td>
                 <td class="darker">
-                    <br />
                     @if (Model.ApplicationUsers.Count > 0)
                     {
                         foreach (var item in Model.ApplicationUsers)
                         {
-                            @item.UserName <br />
+                            <p>	&diams; @item.UserName</p>
                         }
                     }
                     else
@@ -47,7 +46,9 @@
 <div class="detailsDiv">
             <a asp-action="Index" class="indexButton yellow" asp-controller="Ceo">Add new user to team</a>
             <a asp-action="Edit" class="indexButton yellow" asp-route-id="@Model?.Id">Edit</a>
-    <a asp-action="Index">Back to List</a>
+            <a asp-action="Delete" class="indexButton orange" asp-route-id="@Model?.Id">Delete</a>
+            <br />
+            <a asp-action="Index">Back to List</a>
 </div>
 </body>
 </html>

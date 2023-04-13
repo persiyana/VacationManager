@@ -28,6 +28,20 @@
                 <td>Leader:</td>
                 <td class="darker">@Html.DisplayFor(model => model.Leader.UserName)</td>
             </tr>
+            <td>Team members:</td>
+            <td class="darker">
+                @if (Model.ApplicationUsers.Count > 0)
+                {
+                    foreach (var item in Model.ApplicationUsers)
+                    {
+                        <p>	&diams; @item.UserName</p>
+                    }
+                }
+                else
+                {
+                    <i>none</i>
+                }
+            </td>
         </table>
 
         <form asp-action="Delete" class="detailsDiv">

@@ -31,8 +31,7 @@ namespace VacationManager.Controllers
             var user = _userManager.FindByIdAsync(userId).Result;
             var userRoles = await _userManager.GetRolesAsync(user);
             var team = await _context.Teams.Include(t => t.Project).FirstOrDefaultAsync(t => t.Id == user.TeamId);
-            //var project = await _context.Projects.Include(p => p.Teams).FirstOrDefaultAsync(p => p.Id == team.ProjectId);
-
+            
             HomePageModel model = new HomePageModel()
             {
                 FirstName = user.FirstName,
