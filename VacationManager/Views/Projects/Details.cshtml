@@ -13,14 +13,14 @@
 
 <div>
         <h1>Project</h1>
-        <table class="detailsTable">
+        <table class="detailsTable projectDetailsTable">
             <tr>
                 <td>Name:</td>
                 <td class="darker">@Html.DisplayFor(model => model.Name)</td>
             </tr>
             <tr>
                 <td>Description:</td>
-                <td class="darker">@Html.DisplayFor(model => model.Description)</td>
+                <td class="darker " id="both-sides-align">@Html.DisplayFor(model => model.Description)</td>
             </tr>
             <tr>
                 <td>Teams:</td>
@@ -29,7 +29,7 @@
                     {
                         foreach (var item in Model.Teams)
                         {
-                            <p>	&diams; @item.Name</p>
+                            <p>	 @item.Name &diams;</p>
                         }
                     }
                     else

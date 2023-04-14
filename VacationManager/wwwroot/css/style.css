@@ -8,12 +8,17 @@ h1, .alert {
     text-align: center;
 }
     .alert{
-        color:red;
+        color:#e43b3b;
     }
     h1 {
         font-size: 1.6em;
     }
-
+input[type="text"], input[type="date"], input[type="password"], textarea, select {
+    background-color: #d6d2cf;
+}
+    input[type="text"][disabled], input[type="date"][disabled], textarea[disabled], select[disabled] {
+        background-color: #99938d;
+    }
 .h1Button h1 {
     position: relative;
     top: -0.6em;
@@ -63,9 +68,17 @@ body {
             margin: 0 auto;
             width: 30%;
         }
-        .detailsTable td{
-            vertical-align:baseline;
-        }
+.projectDetailsTable {
+    width: 45%;
+}
+#both-sides-align {
+    text-align: justify;
+    text-justify: inter-word;
+}
+.detailsTable td {
+    vertical-align: baseline;
+    padding: 0em 1em;
+}
     .detailsDiv{
         margin-top:1em;
         text-align:center;
@@ -283,25 +296,27 @@ form table{
     left: 0;
     height: 1em;
     width: 1em;
-    margin-left:0.5em;
-    vertical-align:middle;
+    margin-left: 0.5em;
+    vertical-align: middle;
     transition: all 0.15s ease-out 0s;
     background: #4c7957;
     border: none;
-    color: #fff;
+    color: #d6d2cf;
     cursor: pointer;
     display: inline-block;
     outline: none;
     position: relative;
     z-index: 1000;
+    border: 0.1em solid #d6d2cf;
+    border-radius: 0.2em 0.2em;
 }
 
 .checkbox:hover {
-    background: #f4fab5;
+    background: #fad8b5;
 }
 
 .checkbox:checked {
-    background: #deda3c;
+    background: #e99722;
 }
 
 .checkbox:checked::before {
@@ -326,17 +341,29 @@ form table{
         }
 
     .checkbox:disabled, .checkbox[disabled] {
-        border: 1px solid #999999;
         background-color: #cccccc;
         color: #666666;
+        border: 0.1em solid #99938d;
     }
 
 .indexTable {
     position: relative;
     margin: 0 auto;
+    border-spacing: 0 0.3em;
 }
-.indexProjectDescription{
-    width:20em;
+#indexProjectsTable {
+    border-spacing: 0 0em;
+}
+i{
+    color:lightgreen;
+}
+.indexProjectDescription {
+    width: 15em;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: max-content;
 }
 .indexTable th {
     font-style: italic;
@@ -345,7 +372,8 @@ form table{
 }
 .indexTable td {
     text-align: center;
-    vertical-align:baseline;
+    vertical-align: top;
+    padding: 0 1em 0 1em;
 }
 .indexButton {
     text-decoration: none;

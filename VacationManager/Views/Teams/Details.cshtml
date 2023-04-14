@@ -23,7 +23,7 @@
                 <td class="darker">
                     @if (Model.Project !=null )
                     {
-                        <p>	&diams; @Model.Project.Name</p>
+                        @Model.Project.Name
                        
                     }
                     else
@@ -43,7 +43,7 @@
                     {
                         foreach (var item in Model.ApplicationUsers)
                         {
-                            <p>	&diams; @item.UserName</p>
+                            <p>	 @item.UserName &diams;</p>
                         }
                     }
                     else

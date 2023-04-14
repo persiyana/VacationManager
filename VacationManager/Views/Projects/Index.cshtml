@@ -13,7 +13,7 @@
         <a asp-action="Create" class="btn">Create New</a>
         <h1>List of projects</h1>
     </div>
-<table class="indexTable">
+    <table class="indexTable" id="indexProjectsTable">
     <thead>
         <tr>
             <th>
@@ -31,8 +31,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td class="indexProjectDescription">
-                @Html.DisplayFor(modelItem => item.Description)
+            <td >
+                        <div class ="indexProjectDescription">
+                            @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                
             </td>
             <td>
                         <a asp-action="Edit" class="indexButton blue" asp-route-id="@item.Id">Edit</a>
