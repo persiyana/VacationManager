@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,11 +15,15 @@ namespace VacationManager.Controllers
     [Authorize(Roles = "CEO")]
     public class TeamsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
 
-        public TeamsController(ApplicationDbContext context)
+        public TeamsController(UserManager<ApplicationUser> usermanager, ApplicationDbContext context, RoleManager<IdentityRole> rolemanager)
         {
+            _userManager = usermanager;
             _context = context;
+            _roleManager = rolemanager;
         }
 
         // GET: Teams
@@ -67,8 +72,20 @@ namespace VacationManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Teams.Add(team);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Teams.Add(team);
+                _context.SaveChanges(); 
+                var user = _context.ApplicationUsers.FirstOrDefault(u => u.Id == team.LeaderId);
+                user.TeamId = team.Id;
+                _context.SaveChanges();
+
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction(nameof(Error), new { command= "Add"});
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LeaderId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.LeaderId);
@@ -76,6 +93,10 @@ namespace VacationManager.Controllers
             return View(team);
         }
 
+        public IActionResult Error(string command)
+        {
+            return View(model: command);
+        }
         // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -111,9 +132,12 @@ namespace VacationManager.Controllers
                 try
                 {
                     _context.Update(team);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
+                    var user = _context.ApplicationUsers.FirstOrDefault(u => u.Id == team.LeaderId);
+                    user.TeamId = team.Id;
+                    _context.SaveChanges();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
                     if (!TeamExists(team.Id))
                     {
@@ -121,7 +145,7 @@ namespace VacationManager.Controllers
                     }
                     else
                     {
-                        throw;
+                        return RedirectToAction(nameof(Error), new { command = "Update" });
                     }
                 }
                 return RedirectToAction(nameof(Index));

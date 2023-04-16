@@ -39,7 +39,7 @@ namespace VacationManager.Controllers
                 Email = user.Email,
                 Username = user.UserName,
                 Team = team == null ? "" : team.Name,
-                Project = team == null ? "" : _context.Projects.Include(p => p.Teams).FirstOrDefaultAsync(p => p.Id == team.ProjectId).Result.Name,
+                Project = team == null || team.ProjectId==null ? "" : _context.Projects.Include(p => p.Teams).FirstOrDefaultAsync(p => p.Id == team.ProjectId).Result.Name,
                 Role = userRoles[0]
             };
             
