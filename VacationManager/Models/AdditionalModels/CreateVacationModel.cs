@@ -18,7 +18,7 @@ namespace VacationManager.Models.AdditionalModels
         public bool Approved { get; set; }
         [Display(Name = "Vacation option:")]
         public VacationOption VacationOption { get; set; }
-        [Display(Name = "File:")]
+        [Display(Name = "Image:")]
         public IFormFile? Image { get; set; }
         public string? ApplicationUserId { get; set; }
 

@@ -31,14 +31,14 @@ namespace VacationManager.Controllers
             var applicationDbContext = _context.Vacations.Where(v=> v.ApplicationUserId==userId);
             return View(await applicationDbContext.ToListAsync());
         }
-        [Authorize(Roles = "CEO")]
+        [Authorize(Roles = "CEO,Team Lead")]
         public async Task<IActionResult> IndexCeo()
         {
             var applicationDbContext = _context.Vacations.Include(v => v.ApplicationUser);
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Vacations/Edit/5
-        [Authorize(Roles = "CEO")]
+        [Authorize(Roles = "CEO,Team Lead")]
         public async Task<IActionResult> EditCeo(int? id)
         {
             if (id == null || _context.Vacations == null)
@@ -102,8 +102,6 @@ namespace VacationManager.Controllers
                 }
                 return RedirectToAction(nameof(IndexCeo));
             }
-            //ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", vacation.ApplicationUserId);
-            //ViewData["VacationOptions"] = new SelectList(_context.Vacations, "Id", "VacationOption", vacation.VacationOption);
             return View(vacationViewModel);
         }
 
@@ -125,7 +123,7 @@ namespace VacationManager.Controllers
 
             return View(vacation);
         }
-        [Authorize(Roles = "CEO")]
+        [Authorize(Roles = "CEO,Team Lead")]
         public async Task<IActionResult> DetailsCeo(int? id)
         {
             if (id == null || _context.Vacations == null)
@@ -171,7 +169,7 @@ namespace VacationManager.Controllers
                         ApplicationUserId = user.Id,
                         StartDate = vacationModel.StartDate,
                         EndDate = vacationModel.EndDate,
-                        RequestCreationDate = vacationModel.RequestCreationDate,
+                        RequestCreationDate = DateTime.Today,
                         HalfDayVacation = vacationModel.HalfDayVacation,
                         VacationOption = vacationModel.VacationOption,
                         Approved =  false,
@@ -241,7 +239,7 @@ namespace VacationManager.Controllers
                     Vacation vacation = await _context.Vacations.FindAsync(id);
                     vacation.StartDate = vacationViewModel.StartDate;
                     vacation.EndDate = vacationViewModel.EndDate;
-                    vacation.RequestCreationDate = vacationViewModel.RequestCreationDate;
+                    vacation.RequestCreationDate = vacation.RequestCreationDate;
                     vacation.HalfDayVacation = vacationViewModel.HalfDayVacation;
                     vacation.VacationOption = vacationViewModel.VacationOption;
                     _context.Update(vacation);

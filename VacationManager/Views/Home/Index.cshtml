@@ -1,15 +1,20 @@
 ﻿@model VacationManager.Models.AdditionalModels.HomePageModel;
 
 
+    
+    <div id="buttons">
     @if (User.IsInRole("CEO"))
-    {<div id="buttons">
-        <a asp-controller="Ceo" asp-action="Index" class="btn">User settings</a>
+        {<a asp-controller="Ceo" asp-action="Index" class="btn">Users settings</a>
         <a asp-controller="Teams" asp-action="Index" class="btn">Teams information</a>
-        <a asp-controller="Projects" asp-action="Index" class="btn">Projects information</a>
-        <a asp-controller="Vacations" asp-action="IndexCeo" class="btn">Vacations information</a>
+        <a asp-controller="Projects" asp-action="Index" class="btn">Projects information</a>}
+    @if (User.IsInRole("Team Lead") || User.IsInRole("CEO"))
+        {
+            <a asp-controller="Vacations" asp-action="IndexCeo" class="btn">Vacations information</a>
+        }
+        
     </div>
             
-    }
+    
 
     <table id="userInfo">
     <tr>
