@@ -26,12 +26,15 @@ builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService
 
 var app = builder.Build();
 
-using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-    await RoleInitializer.InitializeAsync(roleManager);
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    DbInitializer initializer = new DbInitializer(roleManager, context, userManager);
+    bool shouldDeleteDB = false;
+    initializer.Run(scope.ServiceProvider, shouldDeleteDB);
 }
 
 // Configure the HTTP request pipeline.

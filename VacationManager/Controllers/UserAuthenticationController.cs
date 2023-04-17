@@ -64,37 +64,6 @@ namespace VacationManager.Controllers
         }
 
 
-        /*public async Task<IActionResult> CeoReg()
-        {
-            try
-            {
-
-                if (ModelState.IsValid)
-                {
-                    var model = new RegistrationModel()
-                    {
-                        Role = "ceo",
-                        Username = "petar_ivanov",
-                        Email = "petar_ivanov@gmail.com",
-                        Password = "Petar@123",
-                        FirstName = "Petar",
-                        LastName = "Ivanov"
-                    };
-                    model.Role = "ceo";
-                    var result = await _service.RegistrationAsync(model);
-                    return Ok(result);
-                }
-                else
-                {
-                    TempData["errorMessage"] = "Model data is not valid";
-                    return View();
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-        }*/
+        
     }
 }
